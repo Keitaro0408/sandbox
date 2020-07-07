@@ -15,22 +15,48 @@ public:
 	VulkanBase() {}
 	virtual ~VulkanBase() {}
 
+	/// <summary>
+	/// 初期化
+	/// </summary>
+	/// <param name="appName">アプリケーションの名前</param>
 	void Initialize(const char* appName);
+
+	/// <summary>
+	/// 解放
+	/// </summary>
 	void Finalize();
 
 private:
+
+	/// <summary>
+	/// デバイスの生成
+	/// </summary>
 	bool CreateDevice();
+
+	/// <summary>
+	/// Vulkanインスタンスの生成
+	/// </summary>
+	/// <param name="appName"></param>
 	bool CreateVkInstance(const char* appName);
 
+	/// <summary>
+	/// 物理デバイスの選択
+	/// </summary>
 	void SelectPhysicalDevice();
+
+	/// <summary>
+	/// 物理デバイスインデックスの選択
+	/// </summary>
+	/// <returns>物理デバイスインデックス</returns>
 	uint32_t SearchGraphicsQueueIndex();
 
 	VkResult		 m_LastResult;
 	VkInstance		 m_VkInstance;
 	VkDevice		 m_Device;
-	VkPhysicalDevice m_physDev;
-
-	VkPhysicalDeviceMemoryProperties m_physMemProps;
+	VkQueue			 m_DeviceQueue;
+	VkPhysicalDevice m_PhysicalDevice;
+	uint32_t		 m_GraphicQueueIndex;
+	VkPhysicalDeviceMemoryProperties m_PhysicalMemoryProps;
 
 };
 
