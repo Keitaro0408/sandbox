@@ -44,6 +44,8 @@ private:
 	/// </summary>
 	void SelectPhysicalDevice();
 
+	bool CreateCommandPool(uint32_t grahicsQueueIndex, VkCommandPool& commandPool);
+
 	/// <summary>
 	/// 物理デバイスインデックスの選択
 	/// </summary>

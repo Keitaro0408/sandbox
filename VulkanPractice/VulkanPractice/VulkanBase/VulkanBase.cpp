@@ -114,6 +114,23 @@ void VulkanBase::SelectPhysicalDevice()
 	vkGetPhysicalDeviceMemoryProperties(m_PhysicalDevice, &m_PhysicalMemoryProps);
 }
 
+bool VulkanBase::CreateCommandPool(uint32_t grahicsQueueIndex, VkCommandPool& commandPool)
+{
+	VkCommandPoolCreateInfo info;
+	info.sType = VK_STRUCTURE_TYPE_COMMAND_POOL_CREATE_INFO;
+	info.queueFamilyIndex = grahicsQueueIndex;
+	info.flags = VK_COMMAND_POOL_CREATE_RESET_COMMAND_BUFFER_BIT;
+
+	m_LastResult = vkCreateCommandPool(m_Device, &info, nullptr, &commandPool);
+
+	if (m_LastResult != VK_SUCCESS)
+	{
+		return false;
+	}
+
+	return true;
+}
+
 uint32_t VulkanBase::SearchGraphicsQueueIndex()
 {
 	uint32_t count;
